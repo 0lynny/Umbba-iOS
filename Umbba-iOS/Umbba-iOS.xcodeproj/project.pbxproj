@@ -129,6 +129,7 @@
 		69A67D7E2A5C12F100C43F49 /* AnswerWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A67D7D2A5C12F100C43F49 /* AnswerWriteViewController.swift */; };
 		69A67D812A5C1BB600C43F49 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A67D802A5C1BB600C43F49 /* CustomNavigationBar.swift */; };
 		69A934A72AA0BC21009466D4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 69A934A62AA0BC21009466D4 /* Kingfisher */; };
+		69C0807D2BBE74E500BA418B /* ReloadAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C0807C2BBE74E500BA418B /* ReloadAlertView.swift */; };
 		69DE6B912A53384C00F31812 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DE6B902A53384C00F31812 /* UIColor+.swift */; };
 		69DE6B9B2A5341FF00F31812 /* Cafe24Classictype-v1.1.otf in Resources */ = {isa = PBXBuildFile; fileRef = 69DE6B9A2A5341FF00F31812 /* Cafe24Classictype-v1.1.otf */; };
 		69DE6B9F2A53421D00F31812 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 69DE6B9C2A53421C00F31812 /* Pretendard-SemiBold.otf */; };
@@ -293,6 +294,7 @@
 		69A67D7A2A5C12CE00C43F49 /* AnswerWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerWriteView.swift; sourceTree = "<group>"; };
 		69A67D7D2A5C12F100C43F49 /* AnswerWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerWriteViewController.swift; sourceTree = "<group>"; };
 		69A67D802A5C1BB600C43F49 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
+		69C0807C2BBE74E500BA418B /* ReloadAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadAlertView.swift; sourceTree = "<group>"; };
 		69DE6B902A53384C00F31812 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		69DE6B9A2A5341FF00F31812 /* Cafe24Classictype-v1.1.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cafe24Classictype-v1.1.otf"; sourceTree = "<group>"; };
 		69DE6B9C2A53421C00F31812 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
@@ -491,6 +493,7 @@
 				6951A6952A5D2B5300D49692 /* InviteAlertView.swift */,
 				6951A6AB2A62CBD100D49692 /* DisconnectAlertView.swift */,
 				69A24CF62ACB10B6002F2D75 /* UpdateAlertView.swift */,
+				69C0807C2BBE74E500BA418B /* ReloadAlertView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1715,6 +1718,7 @@
 				A423E8892B64064A00B8C125 /* RecordView.swift in Sources */,
 				693A68E92B6A4B2200D39F20 /* PresentView.swift in Sources */,
 				697E19D82A63286C00D4752D /* ArchivingListService.swift in Sources */,
+				69C0807D2BBE74E500BA418B /* ReloadAlertView.swift in Sources */,
 				697815832A53000D0047944C /* UITableView+.swift in Sources */,
 				6951A6962A5D2B5300D49692 /* InviteAlertView.swift in Sources */,
 				69F2D6B12B93726C0024C498 /* ResultViewController.swift in Sources */,

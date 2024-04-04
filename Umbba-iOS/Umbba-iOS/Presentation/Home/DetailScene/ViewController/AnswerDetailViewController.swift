@@ -108,7 +108,10 @@ extension AnswerDetailViewController: NavigationBarDelegate {
     }
     
     func completeButtonTapped() {
-        
+        print("새로운 질문 가져오기 API")
+        self.makeAlert(alertType: .reloadAlert) {
+            print("새로고침 API")
+        }
     }
 }
 

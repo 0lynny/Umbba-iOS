@@ -137,4 +137,54 @@ extension HomeService {
             }
         }
     }
+    
+    func getRerollCheckAPI(completion: @escaping (NetworkResult<Any>) -> Void) {
+        let url = URLConstant.rerollCheckURL
+        let header: HTTPHeaders = NetworkConstant.hasTokenHeader
+        let dataRequest = AF.request(url,
+                                     method: .get,
+                                     encoding: JSONEncoding.default,
+                                     headers: header)
+        
+        dataRequest.responseData { response in
+            switch response.result {
+            case .success:
+                guard let statusCode = response.response?.statusCode else { return }
+                guard let data = response.data else { return }
+                let networkResult = self.judgeStatus(by: statusCode,
+                                                     data,
+                                                     CheckEntity.self)
+                completion(networkResult)
+            case .failure:
+                completion(.networkFail)
+            }
+        }
+    }
+    
+    func patchRerollChangeAPI(questionId: Int, completion: @escaping (NetworkResult<Any>) -> Void) {
+        let url = URLConstant.rerollChangeURL
+        let header: HTTPHeaders = NetworkConstant.hasTokenHeader
+        let body: Parameters = [
+            "question_id": questionId
+        ]
+        let dataRequest = AF.request(url,
+                                     method: .patch,
+                                     parameters: body,
+                                     encoding: JSONEncoding.default,
+                                     headers: header)
+        
+        dataRequest.responseData { response in
+            switch response.result {
+            case .success:
+                guard let statusCode = response.response?.statusCode else { return }
+                guard let data = response.data else { return }
+                let networkResult = self.judgeStatus(by: statusCode,
+                                                     data,
+                                                     BlankEntity.self)
+                completion(networkResult)
+            case .failure:
+                completion(.networkFail)
+            }
+        }
+    }
 }

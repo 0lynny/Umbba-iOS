@@ -91,6 +91,7 @@ extension AnswerDetailViewController {
         guard let detailEntity = detailEntity else { return }
         answerDetailView.setDetailDataBind(model: detailEntity)
     }
+    
 }
 
 extension AnswerDetailViewController: NavigationBarDelegate {
@@ -108,10 +109,7 @@ extension AnswerDetailViewController: NavigationBarDelegate {
     }
     
     func completeButtonTapped() {
-        print("새로운 질문 가져오기 API")
-        self.makeAlert(alertType: .reloadAlert) {
-            print("새로고침 API")
-        }
+        getRerollCheckAPI()
     }
 }
 
@@ -179,6 +177,41 @@ extension AnswerDetailViewController {
                     }
                 }
             case .requestErr, .serverErr:
+                self.makeAlert(title: "오류가 발생했습니다", message: "다시 시도해주세요")
+            default:
+                break
+            }
+        }
+    }
+    
+    func getRerollCheckAPI() {
+        HomeService.shared.getRerollCheckAPI { networkResult in
+            switch networkResult {
+            case .success(let data):
+                if let data = data as? GenericResponse<CheckEntity> {
+                    if let checkData = data.data {
+                        self.makeAlert(question: checkData.newQuestion, alertType: .reloadAlert) {
+                            self.patchRerollChangeAPI(questionId: checkData.questionID)
+                        }
+                    }
+                }
+            case .requestErr, .serverErr:
+                self.makeAlert(title: "오류가 발생했습니다", message: "다시 시도해주세요")
+            default:
+                break
+            }
+        }
+    }
+    
+    func patchRerollChangeAPI(questionId: Int) {
+        HomeService.shared.patchRerollChangeAPI(questionId: questionId) { networkResult in
+            switch networkResult {
+            case .success:
+                self.getTodayAPI()
+            case .requestErr:
+                // 수정 필요
+                self.showToast(message: "질문 새로 고침은 1일 1회만 가능합니다")
+            case .serverErr:
                 self.makeAlert(title: "오류가 발생했습니다", message: "다시 시도해주세요")
             default:
                 break

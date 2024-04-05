@@ -119,6 +119,7 @@ private extension InviteAlertView {
         logoImageView.snp.makeConstraints {
             $0.top.equalTo(inviteTitle.snp.bottom).offset(19)
             $0.width.equalTo(SizeLiterals.Screen.screenWidth * 173 / 375)
+            $0.height.equalTo(SizeLiterals.Screen.screenHeight * 160 / 812)
             $0.centerX.equalToSuperview()
         }
         

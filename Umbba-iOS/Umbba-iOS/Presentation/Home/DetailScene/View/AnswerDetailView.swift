@@ -25,7 +25,7 @@ final class AnswerDetailView: UIView {
     
     // MARK: - UI Components
     
-    private let navigationBarView: CustomNavigationBar = {
+    let navigationBarView: CustomNavigationBar = {
         let view = CustomNavigationBar()
         view.isTitleViewIncluded = true
         view.isLeftButtonIncluded = true

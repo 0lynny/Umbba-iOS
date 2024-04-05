@@ -85,6 +85,9 @@ extension AnswerDetailViewController {
                 answerDetailView.partnerAnswerContent.blurRadius = 0
             }
         }
+        if isMyAnswer || isOpponentAnswer {
+            self.answerDetailView.navigationBarView.rightButton.isHidden = true
+        }
     }
     
     func fetchDetailData() {
@@ -109,7 +112,13 @@ extension AnswerDetailViewController: NavigationBarDelegate {
     }
     
     func completeButtonTapped() {
-        getRerollCheckAPI()
+        guard let index = todayEntity?.index else { return }
+        if index > 7 {
+            getRerollCheckAPI()
+        } else {
+            self.answerDetailView.navigationBarView.rightButton.isHidden = true
+        }
+        
     }
 }
 

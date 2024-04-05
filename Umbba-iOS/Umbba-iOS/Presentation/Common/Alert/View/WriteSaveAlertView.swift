@@ -168,6 +168,7 @@ private extension WriteSaveAlertView {
         
         questionLabel.snp.makeConstraints {
             $0.top.equalTo(themeStackView.snp.bottom).offset(40)
+            $0.leading.trailing.equalToSuperview().inset(21)
             $0.centerX.equalToSuperview()
         }
         

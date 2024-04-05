@@ -49,11 +49,12 @@ final class ReloadAlertView: UIView {
         return label
     }()
     
-    private let questionsLabel: UILabel = {
+    let questionsLabel: UILabel = {
         let label = UILabel()
-        label.text = "당신과 어머니의 꿈은 달라?"
         label.font = .PretendardSemiBold(size: 20)
         label.textColor = .UmbbaBlack
+        label.numberOfLines = 0
+        label.textAlignment = .center
         return label
     }()
     
@@ -120,7 +121,6 @@ private extension ReloadAlertView {
         backgroundView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(24)
             $0.width.equalTo(SizeLiterals.Screen.screenWidth - 75)
-            $0.height.equalTo(120)
             $0.centerX.equalToSuperview()
         }
         
@@ -131,7 +131,9 @@ private extension ReloadAlertView {
         
         questionsLabel.snp.makeConstraints {
             $0.top.equalTo(newLabel.snp.bottom).offset(12)
+            $0.leading.trailing.equalToSuperview().inset(24)
             $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(24)
         }
         
         subtitleLabel.snp.makeConstraints {

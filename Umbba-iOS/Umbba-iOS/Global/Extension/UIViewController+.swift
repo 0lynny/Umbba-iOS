@@ -57,4 +57,18 @@ extension UIViewController {
         alertViewController.modalPresentationStyle = .overCurrentContext
         present(alertViewController, animated: true)
     }
+    
+    func makeAlert(question: String,
+                   alertType: AlertType = .reloadAlert,
+                   okAction: (() -> Void)?) {
+        
+        let alertViewController = AlertViewController()
+        
+        alertViewController.setAlertType(alertType)
+        alertViewController.setRerollDataBind(question: question)
+        alertViewController.okAction = okAction
+        alertViewController.modalTransitionStyle = .crossDissolve
+        alertViewController.modalPresentationStyle = .overCurrentContext
+        present(alertViewController, animated: true)
+    }
 }

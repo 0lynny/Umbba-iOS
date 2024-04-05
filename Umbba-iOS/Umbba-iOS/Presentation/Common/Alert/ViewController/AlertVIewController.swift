@@ -190,6 +190,12 @@ extension AlertViewController {
             inviteAlertView.inviteCode.text = inviteCode
         }
     }
+    
+    func setRerollDataBind(question: String) {
+        if alertType == .reloadAlert {
+            reloadAlertView.questionsLabel.text = question
+        }
+    }
 }
 
 // MARK: - AlertDelegate

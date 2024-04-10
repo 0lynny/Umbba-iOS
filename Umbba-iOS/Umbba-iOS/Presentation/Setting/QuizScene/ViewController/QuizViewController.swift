@@ -73,7 +73,7 @@ extension QuizViewController {
 extension QuizViewController: NavigationBarDelegate {
     @objc
     func backButtonTapped() {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     func completeButtonTapped() {

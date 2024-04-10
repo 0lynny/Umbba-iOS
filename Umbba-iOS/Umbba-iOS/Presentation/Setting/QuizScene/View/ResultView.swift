@@ -171,7 +171,7 @@ private extension ResultView {
         backgroundView.snp.makeConstraints {
             $0.top.equalTo(balanceSubLabel.snp.bottom).offset(40)
             $0.leading.trailing.equalToSuperview().inset(24)
-            $0.height.equalTo(433)
+            $0.height.equalTo(SizeLiterals.Screen.screenHeight * 433 / 812)
         }
         
         labelView.snp.makeConstraints {
@@ -188,7 +188,7 @@ private extension ResultView {
         resultView.snp.makeConstraints {
             $0.top.equalTo(labelView.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(24)
-            $0.height.equalTo(272)
+            $0.height.equalTo(SizeLiterals.Screen.screenHeight * 272 / 812)
         }
         
         myChoiceLabel.snp.makeConstraints {

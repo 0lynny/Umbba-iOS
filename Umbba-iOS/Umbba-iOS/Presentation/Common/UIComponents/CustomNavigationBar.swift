@@ -71,8 +71,7 @@ final class CustomNavigationBar: UIView {
     
     lazy var rightButton: UIButton = {
         let button = UIButton()
-        button.setImage(ImageLiterals.NavigationBar.icn_check, for: .normal)
-        button.tintColor = .UmbbaBlack
+        button.setImage(UIImage(resource: .iconRedo), for: .normal)
         button.isHidden = true
         return button
     }()

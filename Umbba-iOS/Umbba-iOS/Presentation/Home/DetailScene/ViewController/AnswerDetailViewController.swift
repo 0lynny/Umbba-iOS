@@ -172,6 +172,8 @@ extension AnswerDetailViewController {
                 }
             case .requestErr, .serverErr:
                 self.makeAlert(title: "오류가 발생했습니다", message: "다시 시도해주세요")
+            case .noneQnAErr:
+                self.showToast(message: "남은 질문이 존재하지 않아요")
             default:
                 break
             }

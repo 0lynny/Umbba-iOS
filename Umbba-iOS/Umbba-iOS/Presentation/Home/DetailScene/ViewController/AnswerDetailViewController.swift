@@ -113,8 +113,13 @@ extension AnswerDetailViewController: NavigationBarDelegate {
     
     func completeButtonTapped() {
         guard let index = todayEntity?.index else { return }
+        guard let isRerollTime = todayEntity?.isRerollTime else { return }
         if index > 7 {
-            getRerollCheckAPI()
+            if !isRerollTime {
+                self.showToast(message: "변경한 질문은 되돌릴 수 없어요")
+            } else {
+                getRerollCheckAPI()
+            }
         } else {
             self.answerDetailView.navigationBarView.rightButton.isHidden = true
         }

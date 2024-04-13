@@ -12,6 +12,7 @@ struct TodayEntity: Codable {
     let myAnswer: String?
     let isOpponentAnswer, isMyAnswer: Bool?
     let opponentUsername, myUsername: String?
+    let isRerollTime: Bool
 
     enum CodingKeys: String, CodingKey {
         case qnaID = "qna_id"
@@ -24,5 +25,6 @@ struct TodayEntity: Codable {
         case isMyAnswer = "is_my_answer"
         case opponentUsername = "opponent_username"
         case myUsername = "my_username"
+        case isRerollTime = "is_reroll_time"
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 final class ResultViewController: UIViewController {
-
+    
     // MARK: - Properties
     
     var quizEntity: QuizEntity? {
@@ -62,6 +62,13 @@ extension ResultViewController {
                 if let data = data as? GenericResponse<QuizEntity> {
                     if let quizData = data.data {
                         self.quizEntity = quizData
+                        
+                        if quizData.responseCase == 1 {
+                            let quizViewController = QuizViewController()
+                            quizViewController.quizEntity = quizData
+                            quizViewController.hidesBottomBarWhenPushed = true
+                            self.navigationController?.pushViewController(quizViewController, animated: true)
+                        }
                     }
                 }
             case .requestErr, .serverErr:
@@ -76,20 +83,21 @@ extension ResultViewController {
         QuizService.shared.patchQuizNextAPI { networkResult in
             switch networkResult {
             case .success:
-                self.navigationController?.popViewController(animated: true)
+                self.getQuizAPI()
             case .requestErr, .serverErr:
                 self.makeAlert(title: "오류가 발생했습니다", message: "다시 시도해주세요")
+            case .noneQnAErr:
+                self.showToast(message: "남은 질문이 존재하지 않아요")
             default:
                 break
             }
         }
     }
 }
-
 extension ResultViewController: NavigationBarDelegate {
     @objc
     func backButtonTapped() {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     func completeButtonTapped() {

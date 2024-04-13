@@ -93,6 +93,7 @@ extension AnswerDetailViewController {
     func fetchDetailData() {
         guard let detailEntity = detailEntity else { return }
         answerDetailView.setDetailDataBind(model: detailEntity)
+        self.answerDetailView.navigationBarView.rightButton.isHidden = true
     }
     
 }
@@ -172,8 +173,6 @@ extension AnswerDetailViewController {
                 }
             case .requestErr, .serverErr:
                 self.makeAlert(title: "오류가 발생했습니다", message: "다시 시도해주세요")
-            case .noneQnAErr:
-                self.showToast(message: "남은 질문이 존재하지 않아요")
             default:
                 break
             }
@@ -213,6 +212,8 @@ extension AnswerDetailViewController {
                 }
             case .requestErr, .serverErr:
                 self.makeAlert(title: "오류가 발생했습니다", message: "다시 시도해주세요")
+            case .noneQnAErr:
+                self.showToast(message: "남은 질문이 존재하지 않아요")
             default:
                 break
             }
@@ -224,10 +225,7 @@ extension AnswerDetailViewController {
             switch networkResult {
             case .success:
                 self.getTodayAPI()
-            case .requestErr:
-                // 수정 필요
-                self.showToast(message: "질문 새로 고침은 1일 1회만 가능합니다")
-            case .serverErr:
+            case .requestErr, .serverErr:
                 self.makeAlert(title: "오류가 발생했습니다", message: "다시 시도해주세요")
             default:
                 break

@@ -69,6 +69,22 @@ final class MainView: UIView {
         return button
     }()
     
+     let tutorialBackground: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black.withAlphaComponent(0.5)
+        return view
+    }()
+    
+    let tutorialImage = UIImageView(image: UIImage(resource: .tooltipSmall))
+    
+    let tutorialLabel: UILabel = {
+        let label = UILabel()
+        label.font = .PretendardRegular(size: 16)
+        label.textColor = .Gray900
+        label.textAlignment = .center
+        return label
+    }()
+    
     // MARK: - Life Cycles
     
     override init(frame: CGRect) {
@@ -96,7 +112,8 @@ extension MainView {
     
     func setHierarchy() {
         questionView.addSubview(questionStackView)
-        addSubviews(questionImage, questionView, questionButton)
+        tutorialImage.addSubview(tutorialLabel)
+        addSubviews(questionImage, questionView, tutorialBackground, questionButton, tutorialImage)
     }
     
     func setLayout() {
@@ -120,6 +137,21 @@ extension MainView {
             $0.bottom.equalToSuperview().inset(13)
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(60)
+        }
+        
+        tutorialBackground.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        tutorialImage.snp.makeConstraints {
+            $0.bottom.equalTo(questionButton.snp.top).offset(-8)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(SizeLiterals.Screen.screenWidth - 137)
+        }
+        
+        tutorialLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(6)
+            $0.centerX.equalToSuperview()
         }
     }
     

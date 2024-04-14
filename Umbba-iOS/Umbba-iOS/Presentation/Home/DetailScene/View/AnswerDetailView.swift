@@ -25,10 +25,11 @@ final class AnswerDetailView: UIView {
     
     // MARK: - UI Components
     
-    private let navigationBarView: CustomNavigationBar = {
+    let navigationBarView: CustomNavigationBar = {
         let view = CustomNavigationBar()
         view.isTitleViewIncluded = true
         view.isLeftButtonIncluded = true
+        view.isRightButtonIncluded = true
         return view
     }()
     
@@ -182,6 +183,7 @@ private extension AnswerDetailView {
     
     func setAddTarget() {
         navigationBarView.leftButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        navigationBarView.rightButton.addTarget(self, action: #selector(reloadButtonTapped), for: .touchUpInside)
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         homeButton.addTarget(self, action: #selector(homeButtonTapped), for: .touchUpInside)
     }
@@ -269,6 +271,11 @@ private extension AnswerDetailView {
     @objc
     func backButtonTapped() {
         delegate?.backButtonTapped()
+    }
+    
+    @objc
+    func reloadButtonTapped() {
+        delegate?.completeButtonTapped()
     }
     
     @objc

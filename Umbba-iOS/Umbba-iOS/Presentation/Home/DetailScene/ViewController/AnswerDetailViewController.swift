@@ -85,12 +85,17 @@ extension AnswerDetailViewController {
                 answerDetailView.partnerAnswerContent.blurRadius = 0
             }
         }
+        if isMyAnswer || isOpponentAnswer {
+            self.answerDetailView.navigationBarView.rightButton.isHidden = true
+        }
     }
     
     func fetchDetailData() {
         guard let detailEntity = detailEntity else { return }
         answerDetailView.setDetailDataBind(model: detailEntity)
+        self.answerDetailView.navigationBarView.rightButton.isHidden = true
     }
+    
 }
 
 extension AnswerDetailViewController: NavigationBarDelegate {
@@ -108,6 +113,17 @@ extension AnswerDetailViewController: NavigationBarDelegate {
     }
     
     func completeButtonTapped() {
+        guard let index = todayEntity?.index else { return }
+        guard let isRerollTime = todayEntity?.isRerollTime else { return }
+        if index > 7 {
+            if !isRerollTime {
+                self.showToast(message: "변경한 질문은 되돌릴 수 없어요")
+            } else {
+                getRerollCheckAPI()
+            }
+        } else {
+            self.answerDetailView.navigationBarView.rightButton.isHidden = true
+        }
         
     }
 }
@@ -175,6 +191,40 @@ extension AnswerDetailViewController {
                         self.detailEntity = detailData
                     }
                 }
+            case .requestErr, .serverErr:
+                self.makeAlert(title: "오류가 발생했습니다", message: "다시 시도해주세요")
+            default:
+                break
+            }
+        }
+    }
+    
+    func getRerollCheckAPI() {
+        HomeService.shared.getRerollCheckAPI { networkResult in
+            switch networkResult {
+            case .success(let data):
+                if let data = data as? GenericResponse<CheckEntity> {
+                    if let checkData = data.data {
+                        self.makeAlert(question: checkData.newQuestion, alertType: .reloadAlert) {
+                            self.patchRerollChangeAPI(questionId: checkData.questionID)
+                        }
+                    }
+                }
+            case .requestErr, .serverErr:
+                self.makeAlert(title: "오류가 발생했습니다", message: "다시 시도해주세요")
+            case .noneQnAErr:
+                self.showToast(message: "남은 질문이 존재하지 않아요")
+            default:
+                break
+            }
+        }
+    }
+    
+    func patchRerollChangeAPI(questionId: Int) {
+        HomeService.shared.patchRerollChangeAPI(questionId: questionId) { networkResult in
+            switch networkResult {
+            case .success:
+                self.getTodayAPI()
             case .requestErr, .serverErr:
                 self.makeAlert(title: "오류가 발생했습니다", message: "다시 시도해주세요")
             default:

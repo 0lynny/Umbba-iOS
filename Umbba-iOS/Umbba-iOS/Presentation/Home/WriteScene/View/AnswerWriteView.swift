@@ -151,6 +151,7 @@ private extension AnswerWriteView {
         
         questionLabel.snp.makeConstraints {
             $0.top.equalTo(themeLabel.snp.bottom).offset(24)
+            $0.leading.trailing.equalToSuperview().inset(16)
             $0.centerX.equalToSuperview()
         }
         

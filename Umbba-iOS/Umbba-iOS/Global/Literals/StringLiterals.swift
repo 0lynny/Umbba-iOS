@@ -164,10 +164,10 @@ enum I18N {
         static let dayTitle = "여행을 떠난 지"
         static let answerTitle = "나눈 문답 수"
         static let relationTitle = "가까워지기"
-        static let relationDetail =  "서로에 대한 퀴즈를 풀기"
+        static let relationDetail =  "서로를 알아가는 밸런스 게임"
         static let albumTitle = "기록하기"
-        static let albumDetail = "소중한 순간을 기록하세요"
-        static let copyright = "ub company 2023 어쩌구 ver 1.2 뭔말알"
+        static let albumDetail = "소중한 순간을 기록하는 사진첩"
+        static let copyright = ""
     }
     
     enum Quiz {

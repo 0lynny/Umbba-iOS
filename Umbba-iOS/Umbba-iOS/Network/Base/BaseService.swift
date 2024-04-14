@@ -17,6 +17,7 @@ class BaseService {
         case 200..<300: return .success(decodedData as Any)
         case 400..<500: return .requestErr(decodedData as Any)
         case 500: return .serverErr
+        case 501: return .noneQnAErr
         default: return .networkFail
         }
     }

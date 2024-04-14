@@ -56,5 +56,10 @@ enum URLConstant {
     static let albumURL =  baseURL + "/album"
     static let albumImageURL = baseURL + "/album/image"
     static let albumDeleteURL = baseURL + "/album/"
+    
+    // MARK: - ReRoll URL
+    
+    static let rerollCheckURL = baseURL + "/reroll/check"
+    static let rerollChangeURL = baseURL + "/reroll/change"
 
 }

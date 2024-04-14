@@ -7,6 +7,7 @@
 
 import UIKit
 
+import SnapKit
 import FirebaseDynamicLinks
 
 final class TabBarController: UITabBarController {
@@ -23,6 +24,12 @@ final class TabBarController: UITabBarController {
         let lineView = UIView()
         lineView.backgroundColor = UIColor.Gray300
         return lineView
+    }()
+    
+    private let backgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black.withAlphaComponent(0.5)
+        return view
     }()
     
     // MARK: - Life Cycles
@@ -96,6 +103,7 @@ private extension TabBarController {
         upperLineView.backgroundColor = UIColor.Primary500
         
         tabBar.addSubview(upperLineView)
+        upperLineView.sendSubviewToBack(self.backgroundView)
     }
     
     func addObserver() {
@@ -103,6 +111,8 @@ private extension TabBarController {
         NotificationCenter.default.addObserver(self, selector: #selector(showDisconnectPopUP), name: Notification.Name("disconnect"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showLoadingView), name: Notification.Name("show"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideLoadingView), name: Notification.Name("hide"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showTutorial), name: Notification.Name("showTutorial"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideTutorial), name: Notification.Name("hideTutorial"), object: nil)
     }
     
     func setLayout() {
@@ -145,6 +155,10 @@ private extension TabBarController {
         self.setViewControllers(tabs, animated: false)
         tabBar.backgroundColor = .White500
         tabBar.isTranslucent = false
+        self.tabBar.addSubview(backgroundView)
+        backgroundView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
     @objc func showInvitePopUP(notification: Notification) {
@@ -169,6 +183,14 @@ private extension TabBarController {
             LoadingView.shared.hide {
             }
         }
+    }
+    
+    @objc func showTutorial() {
+        self.backgroundView.isHidden = false
+    }
+    
+    @objc func hideTutorial() {
+        self.backgroundView.isHidden = true
     }
     
     func share(inviteCode: String, inviteUserName: String) {

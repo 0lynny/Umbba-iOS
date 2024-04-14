@@ -157,6 +157,36 @@ final class AnswerDetailView: UIView {
         return button
     }()
     
+    let tutorialBackground: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black.withAlphaComponent(0.5)
+        return view
+    }()
+    
+    let tutorialQuestion  = UIImageView(image: UIImage(resource: .tutorialQuestion))
+    let tutorialImageUp = UIImageView(image: UIImage(resource: .tooltipBigUp))
+    let tutorialImageDown = UIImageView(image: UIImage(resource: .tooltipBigDown))
+    
+    let tutorialUpLabel: UILabel = {
+        let label = UILabel()
+        label.text = "답변을 입력하면\n상대가 받은 질문을 알 수 있어"
+        label.font = .PretendardRegular(size: 16)
+        label.textColor = .Gray900
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    let tutorialDownLabel: UILabel = {
+        let label = UILabel()
+        label.text = "답변은 상대가 확인할 수 있으니\n잘 답변해줘"
+        label.font = .PretendardRegular(size: 16)
+        label.textColor = .Gray900
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+    
     // MARK: - Life Cycles
     
     override init(frame: CGRect) {
@@ -189,7 +219,9 @@ private extension AnswerDetailView {
     }
     
     func setLayout() {
-        self.addSubviews(navigationBarView, themeStackView, nextButton, homeButton, partnerAnswerView, myAnswerView)
+        tutorialImageUp.addSubview(tutorialUpLabel)
+        tutorialImageDown.addSubview(tutorialDownLabel)
+        self.addSubviews(navigationBarView, themeStackView, homeButton, partnerAnswerView, myAnswerView, tutorialBackground, tutorialQuestion, tutorialImageUp, tutorialImageDown, nextButton)
         partnerAnswerView.addSubviews(partnerQuestLabel, partnerNameLabel, partnerLabel, partnerAnswerContent)
         myAnswerView.addSubviews(myQuestLabel, myNameLabel, myLabel, myAnswerContent)
         
@@ -265,6 +297,39 @@ private extension AnswerDetailView {
             $0.width.equalTo(SizeLiterals.Screen.screenWidth - 40)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(60)
+        }
+        
+        tutorialBackground.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        tutorialQuestion.snp.makeConstraints {
+            $0.top.equalTo(partnerAnswerView.snp.top).offset(14)
+            $0.leading.equalTo(partnerAnswerView.snp.leading).offset(12)
+            $0.width.equalTo(SizeLiterals.Screen.screenWidth * 231 / 375)
+            $0.height.equalTo(32)
+        }
+        
+        tutorialImageUp.snp.makeConstraints {
+            $0.top.equalTo(tutorialQuestion.snp.bottom).offset(8)
+            $0.leading.equalTo(partnerAnswerView.snp.leading).offset(11)
+            $0.width.equalTo(SizeLiterals.Screen.screenWidth - 158)
+        }
+        
+        tutorialUpLabel.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(6)
+            $0.centerX.equalToSuperview()
+        }
+        
+        tutorialImageDown.snp.makeConstraints {
+            $0.bottom.equalTo(nextButton.snp.top).offset(-8)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(SizeLiterals.Screen.screenWidth - 146)
+        }
+        
+        tutorialDownLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(6)
+            $0.centerX.equalToSuperview()
         }
     }
     

@@ -114,9 +114,11 @@ private extension MainViewController {
             mainView.setImageBind(model: mainEntity)
         }
         
-        if caseEntity?.responseCase == 2 {
+        guard let homeCase = caseEntity?.responseCase else { return }
+        print(homeCase)
+        if homeCase == 2 {
             mainView.tutorialLabel.text = "상대를 초대하고 답장을 받아보자"
-        } else if caseEntity?.responseCase == 1 && caseEntity?.responseCase == 4 {
+        } else if homeCase == 1 || homeCase == 4 {
             mainView.tutorialLabel.text = "클릭하여 오늘의 질문을 확인하자"
         }
         
@@ -141,6 +143,7 @@ private extension MainViewController {
             }
             let answerDetailController = AnswerDetailViewController()
             answerDetailController.isHome = true
+            answerDetailController.isShowTutorial = false
             keyWindow.rootViewController = UINavigationController(rootViewController: answerDetailController)
             if let navigationController = keyWindow.rootViewController as? UINavigationController {
                 navigationController.isNavigationBarHidden = true
@@ -159,6 +162,7 @@ private extension MainViewController {
             }
             let answerDetailController = AnswerDetailViewController()
             answerDetailController.isHome = true
+            answerDetailController.isShowTutorial = true
             keyWindow.rootViewController = UINavigationController(rootViewController: answerDetailController)
             if let navigationController = keyWindow.rootViewController as? UINavigationController {
                 navigationController.isNavigationBarHidden = true

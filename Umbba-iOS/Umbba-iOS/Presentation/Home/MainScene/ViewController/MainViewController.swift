@@ -115,15 +115,13 @@ private extension MainViewController {
         }
         
         guard let homeCase = caseEntity?.responseCase else { return }
-        print(homeCase)
-        if homeCase == 2 {
-            mainView.tutorialLabel.text = "상대를 초대하고 답장을 받아보자"
-        } else if homeCase == 1 || homeCase == 4 {
-            mainView.tutorialLabel.text = "클릭하여 오늘의 질문을 확인하자"
-        }
-        
         guard let isEntry = firstEntity?.isFirstEntry else { return }
         if isEntry {
+            if homeCase == 2 {
+                mainView.tutorialLabel.text = "상대를 초대하고 답장을 받아보자"
+            } else if homeCase == 4 {
+                mainView.tutorialLabel.text = "클릭하여 오늘의 질문을 확인하자"
+            }
             NotificationCenter.default.post(name: Notification.Name("showTutorial"), object: nil)
             mainView.tutorialBackground.isHidden = false
             mainView.tutorialImage.isHidden = false

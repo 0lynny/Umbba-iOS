@@ -11,6 +11,8 @@ import KakaoSDKCommon
 import KakaoSDKTemplate
 import KakaoSDKShare
 import FirebaseDynamicLinks
+import RxGesture
+import RxSwift
 
 protocol PopUpDelegate: AnyObject {
     func showInvitePopUP(inviteCode: String)
@@ -19,9 +21,10 @@ protocol PopUpDelegate: AnyObject {
 
 final class MainViewController: UIViewController {
     
-    var isShow = false
-    
     // MARK: - Properties
+    
+    var isShow = false
+    private let disposeBag = DisposeBag()
     
     private var caseEntity: CaseEntity? {
         didSet {
@@ -34,6 +37,13 @@ final class MainViewController: UIViewController {
             fetchData()
         }
     }
+    
+    private var firstEntity: FirstEntity? {
+        didSet {
+            fetchData()
+        }
+    }
+    
     var inviteCode: String = ""
     var inviteUserName: String = ""
     
@@ -52,14 +62,17 @@ final class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         getMainAPI()
         getCaseAPI()
+        patchFirstAPI()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setDelegate()
+        setGesture()
         getCaseAPI()
         getMainAPI()
+        patchFirstAPI()
     }
     
     deinit {
@@ -68,9 +81,21 @@ final class MainViewController: UIViewController {
 }
 
 private extension MainViewController {
+    
     func setDelegate() {
         mainView.mainDelegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: NSNotification.Name(rawValue: "patchRestart"), object: nil)
+    }
+    
+    func setGesture() {
+        self.mainView.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { _ in
+                NotificationCenter.default.post(name: Notification.Name("hideTutorial"), object: nil)
+                self.mainView.tutorialBackground.isHidden = true
+                self.mainView.tutorialImage.isHidden = true
+            })
+            .disposed(by: disposeBag)
     }
     
     @objc
@@ -88,6 +113,23 @@ private extension MainViewController {
         } else {
             mainView.setImageBind(model: mainEntity)
         }
+        
+        guard let homeCase = caseEntity?.responseCase else { return }
+        guard let isEntry = firstEntity?.isFirstEntry else { return }
+        if isEntry {
+            if homeCase == 2 {
+                mainView.tutorialLabel.text = I18N.Home.tutorialInviteTitle
+            } else if homeCase == 4 {
+                mainView.tutorialLabel.text = I18N.Home.tutorialQuestionTitle
+            }
+            NotificationCenter.default.post(name: Notification.Name("showTutorial"), object: nil)
+            mainView.tutorialBackground.isHidden = false
+            mainView.tutorialImage.isHidden = false
+        } else {
+            NotificationCenter.default.post(name: Notification.Name("hideTutorial"), object: nil)
+            mainView.tutorialBackground.isHidden = true
+            mainView.tutorialImage.isHidden = true
+        }
     }
     
     func setNextController() {
@@ -99,6 +141,7 @@ private extension MainViewController {
             }
             let answerDetailController = AnswerDetailViewController()
             answerDetailController.isHome = true
+            answerDetailController.isShowTutorial = false
             keyWindow.rootViewController = UINavigationController(rootViewController: answerDetailController)
             if let navigationController = keyWindow.rootViewController as? UINavigationController {
                 navigationController.isNavigationBarHidden = true
@@ -117,6 +160,7 @@ private extension MainViewController {
             }
             let answerDetailController = AnswerDetailViewController()
             answerDetailController.isHome = true
+            answerDetailController.isShowTutorial = true
             keyWindow.rootViewController = UINavigationController(rootViewController: answerDetailController)
             if let navigationController = keyWindow.rootViewController as? UINavigationController {
                 navigationController.isNavigationBarHidden = true
@@ -159,9 +203,7 @@ private extension MainViewController {
             }
         }
     }
-}
-
-extension MainViewController {
+    
     func getCaseAPI() {
         HomeService.shared.getCaseAPI { networkResult in
             switch networkResult {
@@ -171,6 +213,23 @@ extension MainViewController {
                         self.caseEntity = caseData
                         self.inviteUserName = caseData.inviteUsername ?? ""
                         self.inviteCode = caseData.inviteCode ?? ""
+                    }
+                }
+            case .requestErr, .serverErr:
+                self.makeAlert(title: "오류가 발생했습니다", message: "다시 시도해주세요")
+            default:
+                break
+            }
+        }
+    }
+    
+    func patchFirstAPI() {
+        HomeService.shared.patchFirstAPI { networkResult in
+            switch networkResult {
+            case .success(let data):
+                if let data = data as? GenericResponse<FirstEntity> {
+                    if let firstData = data.data {
+                        self.firstEntity = firstData
                     }
                 }
             case .requestErr, .serverErr:

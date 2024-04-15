@@ -7,11 +7,16 @@
 
 import UIKit
 
+import RxSwift
+import RxCocoa
+import RxGesture
+
 final class AnswerDetailViewController: UIViewController {
     
     // MARK: - Properties
     
     var isHome: Bool = true
+    var isShowTutorial: Bool = false
     
     private var todayEntity: TodayEntity? {
         didSet {
@@ -26,6 +31,7 @@ final class AnswerDetailViewController: UIViewController {
     }
     
     var questionId: Int = -1
+    private let disposeBag = DisposeBag()
     
     // MARK: - UI Components
     
@@ -50,12 +56,33 @@ final class AnswerDetailViewController: UIViewController {
         
         routeAPI()
         setDelegate()
+        setUI()
+        setViewGesture()
     }
 }
 
 // MARK: - Extensions
 
 extension AnswerDetailViewController {
+    
+    func setUI() {
+        showTutorial(show: self.isShowTutorial)
+    }
+    
+    func showTutorial(show: Bool) {
+        [ answerDetailView.tutorialBackground, answerDetailView.tutorialImageUp, answerDetailView.tutorialImageDown, answerDetailView.tutorialQuestion].forEach { view in
+            view.isHidden = !show
+        }
+    }
+    
+    func setViewGesture() {
+        self.answerDetailView.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { _ in
+                self.showTutorial(show: false)
+            })
+            .disposed(by: disposeBag)
+    }
     
     func setDelegate() {
         answerDetailView.delegate = self
@@ -84,6 +111,7 @@ extension AnswerDetailViewController {
             if isOpponentAnswer {
                 answerDetailView.partnerAnswerContent.blurRadius = 0
             }
+            self.showTutorial(show: false)
         }
         if isMyAnswer || isOpponentAnswer {
             self.answerDetailView.navigationBarView.rightButton.isHidden = true

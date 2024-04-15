@@ -34,6 +34,7 @@ enum URLConstant {
     static let restartURL = baseURL + "/qna/restart"
     
     static let caseURL = baseURL + "/home/case"
+    static let firstURL = baseURL + "/home/first"
     
     // MARK: - Archiving URL
  

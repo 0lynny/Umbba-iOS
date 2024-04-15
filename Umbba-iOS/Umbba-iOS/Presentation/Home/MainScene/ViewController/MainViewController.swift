@@ -118,9 +118,9 @@ private extension MainViewController {
         guard let isEntry = firstEntity?.isFirstEntry else { return }
         if isEntry {
             if homeCase == 2 {
-                mainView.tutorialLabel.text = "상대를 초대하고 답장을 받아보자"
+                mainView.tutorialLabel.text = I18N.Home.tutorialInviteTitle
             } else if homeCase == 4 {
-                mainView.tutorialLabel.text = "클릭하여 오늘의 질문을 확인하자"
+                mainView.tutorialLabel.text = I18N.Home.tutorialQuestionTitle
             }
             NotificationCenter.default.post(name: Notification.Name("showTutorial"), object: nil)
             mainView.tutorialBackground.isHidden = false

@@ -103,6 +103,8 @@ enum I18N {
         static let noneAnswer = "상대방이 아직 답변하지 않았어요"
         static let yetAnswer = "아래 질문에 답하고 내용을 확인하세요"
         static let pleaseAnswer = "하단 버튼을 눌러 답변을 입력하세요"
+        static let tutorialUpTitle = "답변을 입력하면\n상대가 받은 질문을 알 수 있어"
+        static let tutorialDownTitle = "답변은 상대가 확인할 수 있으니\n잘 답변해줘"
     }
     
     enum Setting {
@@ -150,6 +152,8 @@ enum I18N {
     
     enum Home {
         static let questionButtonTitle = "질문 확인하기"
+        static let tutorialInviteTitle = "상대를 초대하고 답장을 받아보자"
+        static let tutorialQuestionTitle = "클릭하여 오늘의 질문을 확인하자"
     }
     
     enum Ending {

@@ -169,7 +169,7 @@ final class AnswerDetailView: UIView {
     
     let tutorialUpLabel: UILabel = {
         let label = UILabel()
-        label.text = "답변을 입력하면\n상대가 받은 질문을 알 수 있어"
+        label.text = I18N.Detail.tutorialUpTitle
         label.font = .PretendardRegular(size: 16)
         label.textColor = .Gray900
         label.textAlignment = .center
@@ -179,7 +179,7 @@ final class AnswerDetailView: UIView {
     
     let tutorialDownLabel: UILabel = {
         let label = UILabel()
-        label.text = "답변은 상대가 확인할 수 있으니\n잘 답변해줘"
+        label.text = I18N.Detail.tutorialDownTitle
         label.font = .PretendardRegular(size: 16)
         label.textColor = .Gray900
         label.textAlignment = .center

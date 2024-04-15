@@ -70,10 +70,9 @@ extension AnswerDetailViewController {
     }
     
     func showTutorial(show: Bool) {
-        answerDetailView.tutorialBackground.isHidden = !show
-        answerDetailView.tutorialImageUp.isHidden = !show
-        answerDetailView.tutorialImageDown.isHidden = !show
-        answerDetailView.tutorialQuestion.isHidden = !show
+        [ answerDetailView.tutorialBackground, answerDetailView.tutorialImageUp, answerDetailView.tutorialImageDown, answerDetailView.tutorialQuestion].forEach { view in
+            view.isHidden = !show
+        }
     }
     
     func setViewGesture() {

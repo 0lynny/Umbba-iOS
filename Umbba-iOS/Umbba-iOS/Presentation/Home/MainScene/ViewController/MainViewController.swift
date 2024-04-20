@@ -119,7 +119,7 @@ private extension MainViewController {
         if isEntry {
             if homeCase == 2 {
                 mainView.tutorialLabel.text = I18N.Home.tutorialInviteTitle
-            } else if homeCase == 4 {
+            } else if homeCase == 1 || homeCase == 4 {
                 mainView.tutorialLabel.text = I18N.Home.tutorialQuestionTitle
             }
             NotificationCenter.default.post(name: Notification.Name("showTutorial"), object: nil)

@@ -149,7 +149,7 @@ private extension RecordCollectionViewCell {
         
         titleView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(51)
+            $0.height.equalTo(48)
         }
         
         recordTitleLabel.snp.makeConstraints {

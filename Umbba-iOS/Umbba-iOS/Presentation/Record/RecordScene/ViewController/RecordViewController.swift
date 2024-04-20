@@ -56,7 +56,7 @@ extension RecordViewController {
     }
     
     @objc func albumeDeleted(_ notification: Notification) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
             self.recordViewModel.inputs.getAlbum()
         }
     }

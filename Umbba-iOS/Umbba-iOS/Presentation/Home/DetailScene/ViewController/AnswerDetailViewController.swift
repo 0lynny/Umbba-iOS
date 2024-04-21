@@ -103,6 +103,7 @@ extension AnswerDetailViewController {
         guard let todayEntity = todayEntity else { return }
         guard let isMyAnswer = todayEntity.isMyAnswer else { return }
         guard let isOpponentAnswer = todayEntity.isOpponentAnswer else { return }
+        guard let index = todayEntity.index else { return }
         answerDetailView.setTodayDataBind(model: todayEntity)
         if isMyAnswer {
             answerDetailView.partnerQuestLabel.blurRadius = 0
@@ -113,7 +114,7 @@ extension AnswerDetailViewController {
             }
             self.showTutorial(show: false)
         }
-        if isMyAnswer || isOpponentAnswer {
+        if isMyAnswer || isOpponentAnswer || index < 8 {
             self.answerDetailView.navigationBarView.rightButton.isHidden = true
         }
     }
@@ -149,10 +150,7 @@ extension AnswerDetailViewController: NavigationBarDelegate {
             } else {
                 getRerollCheckAPI()
             }
-        } else {
-            self.answerDetailView.navigationBarView.rightButton.isHidden = true
         }
-        
     }
 }
 

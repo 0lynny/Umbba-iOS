@@ -281,6 +281,7 @@
 		697E19D52A63285D00D4752D /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
 		697E19D72A63286C00D4752D /* ArchivingListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivingListService.swift; sourceTree = "<group>"; };
 		697E19DB2A65D63100D4752D /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		698839E82BD4C30A00D9E5DF /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		698C65012AD7C30100F9765C /* UITextVeiw+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextVeiw+.swift"; sourceTree = "<group>"; };
 		6991BA6D2A5731330091D52D /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		6991BA6F2A57314A0091D52D /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
@@ -646,6 +647,7 @@
 				697815912A53018B0047944C /* Presentation */,
 				697815512A52FA380047944C /* Info.plist */,
 				697815FA2A5314BE0047944C /* .swiftlint.yml */,
+				698839E82BD4C30A00D9E5DF /* PrivacyInfo.xcprivacy */,
 			);
 			path = "Umbba-iOS";
 			sourceTree = "<group>";
@@ -1976,7 +1978,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 11;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 9YCVZHNG67;
@@ -2019,7 +2021,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 11;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 9YCVZHNG67;

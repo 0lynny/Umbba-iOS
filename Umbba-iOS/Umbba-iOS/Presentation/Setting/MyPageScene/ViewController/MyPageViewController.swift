@@ -65,6 +65,9 @@ private extension MyPageViewController {
     
     @objc
     func albumViewTapped() {
+        if myPageEntity?.isOpponentExit == true {
+            NotificationCenter.default.post(name: Notification.Name("disconnect"), object: nil, userInfo: nil)
+        } else
         if myPageEntity?.opponentUsername == nil {
             guard let inviteCode = myPageEntity?.inviteCode  else { return }
             guard let inviteUsername = myPageEntity?.myUsername else { return }
@@ -79,7 +82,9 @@ private extension MyPageViewController {
     
     @objc
     func relationViewTapped() {
-        if myPageEntity?.opponentUsername == nil {
+        if myPageEntity?.isOpponentExit == true {
+            NotificationCenter.default.post(name: Notification.Name("disconnect"), object: nil, userInfo: nil)
+        } else if myPageEntity?.opponentUsername == nil {
             guard let inviteCode = myPageEntity?.inviteCode  else { return }
             guard let inviteUsername = myPageEntity?.myUsername else { return }
             guard let installURL = myPageEntity?.installURL else { return }

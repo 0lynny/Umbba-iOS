@@ -14,6 +14,7 @@ struct MyPageEntity: Codable {
     let matchedDate, qnaCnt: Int
     let inviteCode: String?
     let installURL: String?
+    let isOpponentExit: Bool
 
     enum CodingKeys: String, CodingKey {
         case myUsername = "my_username"
@@ -27,5 +28,6 @@ struct MyPageEntity: Codable {
         case qnaCnt = "qna_cnt"
         case inviteCode = "invite_code"
         case installURL = "install_url"
+        case isOpponentExit = "is_opponent_exit"
     }
 }
